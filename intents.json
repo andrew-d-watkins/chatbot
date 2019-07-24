@@ -1,32 +1,72 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
-         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+         "patterns": ["hi", "is anyone there", "hello", "good day", "whats up", "good evening", "good morning", "morning", "greetings", "salutations"],
+         "responses": ["Hello!", "Hi there, how can I help?"],
          "context_set": ""
         },
-        {"tag": "goodbye",
-         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
-         "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"],
+        {"tag": "farewell",
+         "patterns": ["cya", "see you later", "goodbye", "i am leaving", "have a good day", "goodnight", "good night", "bye", "farewell"],
+         "responses": ["Have a nice day, bye!", "Goodbye!"],
          "context_set": ""
         },
-        {"tag": "age",
-         "patterns": ["how old", "how old is tim", "what is your age", "how old are you", "age?"],
-         "responses": ["I am 18 years old!", "18 years young!"],
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure"],
          "context_set": ""
         },
         {"tag": "name",
-         "patterns": ["what is your name", "what should I call you", "whats your name?"],
-         "responses": ["You can call me Tim.", "I'm Tim!", "I'm Tim aka Tech With Tim."],
+         "patterns": ["what is your name", "what should I call you", "whats your name", "name"],
+         "responses": ["You can call me Andrew.", "I'm Andrew!", "My name is Andrew D. Watkins"],
          "context_set": ""
         },
-        {"tag": "shop",
-         "patterns": ["Id like to buy something", "whats on the menu", "what do you reccommend?", "could i get something to eat"],
-         "responses": ["We sell chocolate chip cookies for $2!", "Cookies are on the menu!"],
+        {"tag": "about",
+         "patterns": ["tell me about yourself", "summary", "about yourself"],
+         "responses": ["I am a Data scientist. I have insatiable curiosity; always wanting to learn and try new things. Highly skilled in programming, machine learning, data visualization, and creative problem-solving."],
          "context_set": ""
         },
-        {"tag": "hours",
-         "patterns": ["when are you guys open", "what are your hours", "hours of operation"],
-         "responses": ["We are open 7am-4pm Monday-Friday!"],
+        {"tag": "age",
+         "patterns": ["how old", "how old is andrew", "what is your age", "how old are you", "age"],
+         "responses": ["I am 28 years old."],
+         "context_set": ""
+        },
+        {"tag": "contact",
+         "patterns": ["where can i reach you", "what is your email", "email", "contact information", "contact", "contact info"],
+         "responses": ["You can email me at andrew.david.watkins@gmail.com"],
+         "context_set": ""
+        },
+        {"tag": "education",
+         "patterns": ["education", "study", "where did you study", "what did you study"],
+         "responses": ["I have a Bachelors degree in Computer Science from the University of Puerto Rico. I have also studied Data Sciene for the past year."],
+         "context_set": ""
+        },
+        {"tag": "availibility",
+         "patterns": ["", ""],
+         "responses": [" "],
+         "context_set": ""
+       },
+        {"tag": "experience",
+         "patterns": ["where did you work", "experience", "work experience", "whats your work experience", "where have you worked before"],
+         "responses": [""],
+         "context_set": ""
+        },
+        {"tag": "skill",
+         "patterns": ["", ""],
+         "responses": [""],
+         "context_set": ""
+        },
+        {"tag": "project",
+         "patterns": ["project", "data science project", "research"],
+         "responses": ["I have done two capstone projects, an analysis of our homeless population and a toxcity classifier. You can view them at my GitHub."],
+         "context_set": ""
+        },
+        {"tag": "award",
+         "patterns": ["awards", "accolades", "mvp", "achievements"],
+         "responses": ["In 2014, I was given the MVP (Most Valuable Professional) award for automatizing tests that drastically reduced QA time and help the project come under-budget"],
+         "context_set": ""
+        },
+        {"tag": "portfolio",
+         "patterns": ["portfolio", "github", "repo", "repository", "git"],
+         "responses": ["You can find my GitHub at https://github.com/andrew-d-watkins"],
          "context_set": ""
         }
    ]

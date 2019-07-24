@@ -1,3 +1,6 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import numpy as np
 import tflearn
 import tensorflow as tf
@@ -8,19 +11,25 @@ import pickle
 from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
 
-with open("intents.json") as file:
-    data = json.load(file)
-
-try:
+def get_data():
+    #load training data
     with open('data.pickle', 'rb') as f:
         words, labels, training, output = pickle.load(f)
-except:
+
+    return (words, labels, training, output)
+
+def create_data():
+    with open("intents.json") as file:
+        intents = json.load(file)
+
+    #create training data
     words = []
     labels = []
     docs_pattern = []
     docs_intent = []
+    ignore_words = ['?']
 
-    for intent in data['intents']:
+    for intent in intents['intents']:
         for pattern in intent['patterns']:
             tokens = nltk.word_tokenize(pattern)
             words.extend(tokens)
@@ -30,16 +39,15 @@ except:
             if intent['tag'] not in labels:
                 labels.append(intent['tag'])
 
-    words = [stemmer.stem(w.lower()) for w in words if w != "?"]
-    words = sorted(list(set(words)))
+    words = [stemmer.stem(w.lower()) for w in words if w not in ignore_words]
 
-    labels = sorted(labels)
+    words = sorted(list(set(words)))
+    labels = sorted(list(set(labels)))
 
     training = []
     output = []
-    out_empty = [0 for _ in range(len(labels))]
+    out_empty = [0] * len(labels)
 
-    #change to count_vectorizer
     for X, doc in enumerate(docs_pattern):
         bag = []
 
@@ -62,53 +70,85 @@ except:
     with open('data.pickle', 'wb') as f:
         pickle.dump((words, labels, training, output), f)
 
-tf.reset_default_graph()
+    return (words, labels, training, output)
 
-net = tflearn.input_data(shape=[None, len(training[0])])
-net = tflearn.fully_connected(net, 8)
-net = tflearn.fully_connected(net, 8)
-net = tflearn.fully_connected(net, len(output[0]), activation='softmax')
-net = tflearn.regression(net)
+def get_model(training, output):
+    tf.reset_default_graph()
 
-model = tflearn.DNN(net)
+    net = tflearn.input_data(shape=[None, len(training[0])])
+    net = tflearn.fully_connected(net, 8)
+    net = tflearn.fully_connected(net, 8)
+    net = tflearn.fully_connected(net, len(output[0]), activation='softmax')
+    net = tflearn.regression(net)
 
-try:
-    model.load('model.tflearn')
-except:
-    model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
-    model.save('model.tflearn')
+    try:
+        model = tflearn.DNN(net)
+        model.load('model.tflearn')
+    except:
+        model = tflearn.DNN(net)
+        model.fit(training, output, n_epoch=1000, batch_size=8)
+        model.save("model.tflearn")
 
-def bag_of_words(s, words):
-    bag = [0 for _ in range(len(words))]
+    return model
 
-    s_words = nltk.word_tokenize(s)
-    s_words = [stemmer.stem(word.lower()) for word in s_words]
 
-    for se in s_words:
+def clean_up_sentence(sentence):
+    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [stemmer.stem(word.lower()) for word in sentence_words]
+
+    return sentence_words
+
+def bag_of_words(sentence, words):
+    bag = [0] * len(words)
+
+    sentence_clean = clean_up_sentence(sentence)
+
+    for word in sentence_clean:
         for i, w in enumerate(words):
-            if w == se:
+            if w == word:
                 bag[i] = 1
 
     return np.array(bag)
 
-def chat():
-    print("Lets chat! (type quit to end conversation)")
+
+def classify_input(input, words, labels, training, output):
+    model = get_model(training, output)
+
+    results = model.predict([bag_of_words(input, words)])
+    tag_index = np.argmax(results)
+    input_tag = labels[tag_index]
+
+    return input_tag
+
+
+def respond(input, words, labels, training, output):
+    input_tag = classify_input(input, words, labels, training, output)
+
+    with open("intents.json") as file:
+        intents = json.load(file)
+
+    for label in intents['intents']:
+        if label['tag'] == input_tag:
+            responses = label['responses']
+
+    print(random.choice(responses))
+
+def listen():
+    try:
+        words, labels, training, output = get_data()
+    except:
+        words, labels, training, output = create_data()
+
     while True:
         inp = input('You: ')
         if inp.lower() == 'quit':
             break
 
-        results = model.predict([bag_of_words(inp, words)])
-        results_index = np.argmax(results)
-        tag = labels[results_index]
+        respond(inp, words, labels, training, output)
 
-        for tg in data['intents']:
-            if tg['tag'] == tag:
-                responses = tg['responses']
+def chat():
+    print("Lets chat! (type quit to end conversation)")
+    listen()
 
-        print(random.choice(responses))
-
-#def response():
-
-
+#starts the conversation
 chat()
