@@ -37,12 +37,17 @@
         {"tag": "education",
          "patterns": ["What is your education?", "Where did you study?", "Where did you study", "What did you study?"],
          "responses": ["I have a Bachelors degree in Computer Science from the University of Puerto Rico. I have also studied Data Sciene for the past year."],
-         "context_set": ""
+         "context_set": "addtionalexp"
         },
         {"tag": "experience",
          "patterns": ["Where did you work?", "experience", "Work experience", "Whats your work experience", "Where have you worked before?"],
          "responses": ["My latest position was as Tech Support Engineer at Progress."],
-         "context_set": ""
+         "context_set": "addtionalexp"
+        },
+        {"tag": "more-experience",
+         "patterns": ["Where else?", "Anywhere else?", "Where else have you worked?"],
+         "responses": ["I was also a Java Software Developer at Evertec."],
+         "context_filter": "addtionalexp"
         },
         {"tag": "project",
          "patterns": ["What projects have you done?", "What data science projects do you have?", "Have you done any research projects?"],
@@ -58,6 +63,17 @@
          "patterns": ["Do you have a portfolio?", "What is your GitHub?", "repo", "repository", ""],
          "responses": ["You can find my GitHub at https://github.com/andrew-d-watkins"],
          "context_set": ""
-        }
+       },
+        {"tag": "general-skills",
+         "patterns": ["What skills do you have?", ""],
+         "responses": [""],
+         "context_set": "moreskills"
+       },
+       {"tag": "ml-skills",
+        "patterns": ["What else do you know?", "What other skills do you have?", "Could you "],
+        "responses": [""],
+        "context_filter": "more-ml-skills"
+       }
+
    ]
 }
