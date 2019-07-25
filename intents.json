@@ -1,71 +1,61 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["hi", "is anyone there", "hello", "good day", "whats up", "good evening", "good morning", "morning", "greetings", "salutations"],
+         "patterns": ["Hi", "Is anyone there?", "Hello", "Good day", "What's up?", "Good evening", "Good morning", "Morning", "Greetings", "Salutations"],
          "responses": ["Hello!", "Hi there, how can I help?"],
          "context_set": ""
         },
         {"tag": "farewell",
-         "patterns": ["cya", "see you later", "goodbye", "i am leaving", "have a good day", "goodnight", "good night", "bye", "farewell"],
+         "patterns": ["cya", "Goodbye!", "I am leaving", "Have a good day", "Goodnight!", "Good night", "Bye", "Farewell"],
          "responses": ["Have a nice day, bye!", "Goodbye!"],
          "context_set": ""
         },
         {"tag": "thanks",
-         "patterns": ["Thanks", "Thank you", "That's helpful"],
+         "patterns": ["Thanks!", "Thank you", "That's helpful", "Thank you very much"],
          "responses": ["Happy to help!", "Any time!", "My pleasure"],
          "context_set": ""
         },
         {"tag": "name",
-         "patterns": ["what is your name", "what should I call you", "whats your name", "name"],
+         "patterns": ["What is your name?", "What should I call you?", "Whats your name?", "name?"],
          "responses": ["You can call me Andrew.", "I'm Andrew!", "My name is Andrew D. Watkins"],
          "context_set": ""
         },
         {"tag": "about",
-         "patterns": ["tell me about yourself", "summary", "about yourself"],
+         "patterns": ["Tell me about yourself", "About yourself", "Tell me something about yourself"],
          "responses": ["I am a Data scientist. I have insatiable curiosity; always wanting to learn and try new things. Highly skilled in programming, machine learning, data visualization, and creative problem-solving."],
          "context_set": ""
         },
         {"tag": "age",
-         "patterns": ["how old", "how old is andrew", "what is your age", "how old are you", "age"],
+         "patterns": ["How old", "How old is Andrew?", "What is your age?", "How old are you?", "age?"],
          "responses": ["I am 28 years old."],
          "context_set": ""
         },
         {"tag": "contact",
-         "patterns": ["where can i reach you", "what is your email", "email", "contact information", "contact", "contact info"],
+         "patterns": ["Where can I reach you?", "How can I reach you?", "What is your email?", "email?", "Contact Information", "contact", "Contact info"],
          "responses": ["You can email me at andrew.david.watkins@gmail.com"],
          "context_set": ""
         },
         {"tag": "education",
-         "patterns": ["education", "study", "where did you study", "what did you study"],
+         "patterns": ["What is your education?", "Where did you study?", "Where did you study", "What did you study?"],
          "responses": ["I have a Bachelors degree in Computer Science from the University of Puerto Rico. I have also studied Data Sciene for the past year."],
          "context_set": ""
         },
-        {"tag": "availibility",
-         "patterns": ["", ""],
-         "responses": [" "],
-         "context_set": ""
-       },
         {"tag": "experience",
-         "patterns": ["where did you work", "experience", "work experience", "whats your work experience", "where have you worked before"],
-         "responses": [""],
-         "context_set": ""
-        },
-        {"tag": "skill",
-         "patterns": ["", ""],
-         "responses": [""],
+         "patterns": ["Where did you work?", "experience", "Work experience", "Whats your work experience", "Where have you worked before?"],
+         "responses": ["My latest position was as Tech Support Engineer at Progress."],
          "context_set": ""
         },
         {"tag": "project",
-         "patterns": ["project", "data science project", "research"],
+         "patterns": ["What projects have you done?", "What data science projects do you have?", "Have you done any research projects?"],
          "responses": ["I have done two capstone projects, an analysis of our homeless population and a toxcity classifier. You can view them at my GitHub."],
          "context_set": ""
         },
         {"tag": "award",
-         "patterns": ["awards", "accolades", "mvp", "achievements"],
+         "patterns": ["Do you have any awards?", "Do you have any accolades?", "Have you ever been a MVP?", "Do you have any achievements?"],
          "responses": ["In 2014, I was given the MVP (Most Valuable Professional) award for automatizing tests that drastically reduced QA time and help the project come under-budget"],
          "context_set": ""
         },
         {"tag": "portfolio",
-         "patterns": ["portfolio", "github", "repo", "repository", "git"],
+         "patterns": ["Do you have a portfolio?", "What is your GitHub?", "repo", "repository", ""],
          "responses": ["You can find my GitHub at https://github.com/andrew-d-watkins"],
          "context_set": ""
         }
